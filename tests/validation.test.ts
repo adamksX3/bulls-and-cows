@@ -65,4 +65,16 @@ describe('createDigitValidator', () => {
   test('rejects two characters in hex', () => {
     expect(createDigitValidator(16)('11')).toBe(false);
   });
+
+  test('rejects 01 in binary', () => {
+    expect(createDigitValidator(2)('01')).toBe(false);
+  });
+
+  test('rejects 12 in hex', () => {
+    expect(createDigitValidator(16)('12')).toBe(false);
+  });
+
+  test('rejects empty string', () => {
+    expect(createDigitValidator(10)('')).toBe(false);
+  });
 });
