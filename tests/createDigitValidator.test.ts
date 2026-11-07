@@ -18,6 +18,10 @@ describe('createDigitValidator', () => {
     expect(createDigitValidator(2)('15')).toBe(false);
   });
 
+  test('rejects 01 in binary', () => {
+    expect(createDigitValidator(2)('01')).toBe(false);
+  });
+
   test('accepts 0 in octal', () => {
     expect(createDigitValidator(8)('0')).toBe(true);
   });
@@ -34,6 +38,10 @@ describe('createDigitValidator', () => {
     expect(createDigitValidator(8)('15')).toBe(false);
   });
 
+  test('accepts 0 in decimal', () => {
+    expect(createDigitValidator(10)('0')).toBe(true);
+  });
+
   test('accepts 9 in decimal', () => {
     expect(createDigitValidator(10)('9')).toBe(true);
   });
@@ -46,8 +54,8 @@ describe('createDigitValidator', () => {
     expect(createDigitValidator(10)('a')).toBe(false);
   });
 
-  test('accepts 0 in decimal', () => {
-    expect(createDigitValidator(10)('0')).toBe(true);
+  test('rejects empty string', () => {
+    expect(createDigitValidator(10)('')).toBe(false);
   });
 
   test('accepts lowercase a in hex', () => {
@@ -66,15 +74,7 @@ describe('createDigitValidator', () => {
     expect(createDigitValidator(16)('11')).toBe(false);
   });
 
-  test('rejects 01 in binary', () => {
-    expect(createDigitValidator(2)('01')).toBe(false);
-  });
-
   test('rejects 12 in hex', () => {
     expect(createDigitValidator(16)('12')).toBe(false);
-  });
-
-  test('rejects empty string', () => {
-    expect(createDigitValidator(10)('')).toBe(false);
   });
 });
