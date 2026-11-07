@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "target": "ES2025",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "lib": ["ES2025", "DOM"],
-        "rootDir": "src",
-        "outDir": "dist",
-        "strict": true,
-        "skipLibCheck": true
-    },
-    "include": ["src"]
+  "compilerOptions": {
+    "target": "ES2025",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2025", "DOM"],
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
 }
