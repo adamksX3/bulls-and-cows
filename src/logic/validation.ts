@@ -5,3 +5,5 @@ export const createDigitValidator = (base: number) => {
   return (char: string): boolean =>
     char.length === 1 && systemValidNumbers.includes(char.toLowerCase());
 };
+
+export const isValidGuess = (_guess: string, _length: number, _base: number): boolean => false;
