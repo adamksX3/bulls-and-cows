@@ -1,5 +1,17 @@
+import { DIGITS } from './validation.js';
+
 export const generateSecret = (
-  _length: number,
-  _base: number,
-  _random: () => number = Math.random,
-): string => '';
+  length: number,
+  base: number,
+  random: () => number = Math.random,
+): string => {
+  let bag = DIGITS.slice(0, base);
+  let secret = '';
+
+  for (let i = 0; i < length; i++) {
+    const index = Math.floor(random() * bag.length);
+    secret += bag[index];
+    bag = bag.slice(0, index) + bag.slice(index + 1);
+  }
+  return secret;
+};
