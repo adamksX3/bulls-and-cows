@@ -28,6 +28,7 @@ bases.forEach((system) => {
   option.textContent = system.label;
   baseSelect.append(option);
 });
+baseSelect.value = '10';
 const baseLabel = document.createElement('label');
 baseLabel.textContent = 'Base ';
 baseLabel.append(baseSelect);
