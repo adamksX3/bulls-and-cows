@@ -16,4 +16,7 @@ export const generateSecret = (
   return secret;
 };
 
-export const countPossibleSecrets = (_length: number, _base: number): number => 0;
+export const countPossibleSecrets = (length: number, base: number): number => {
+  if (length === 0) return 1;
+  return countPossibleSecrets(length - 1, base) * (base - length + 1);
+};
