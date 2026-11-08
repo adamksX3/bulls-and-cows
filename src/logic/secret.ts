@@ -16,7 +16,16 @@ export const generateSecret = (
   return secret;
 };
 
+const cache = new Map<string, number>();
+
 export const countPossibleSecrets = (length: number, base: number): number => {
   if (length === 0) return 1;
-  return countPossibleSecrets(length - 1, base) * (base - length + 1);
+
+  const key = `${length}-${base}`;
+  const cached = cache.get(key);
+  if (cached !== undefined) return cached;
+
+  const result = countPossibleSecrets(length - 1, base) * (base - length + 1);
+  cache.set(key, result);
+  return result;
 };
