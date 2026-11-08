@@ -18,3 +18,7 @@ export const addToLeaderboard = (
     })
     .slice(0, limit);
 };
+
+export const getLeaderboardKey = (length: number, base: number): string => {
+  return `leaderboard-${length}-${base}`;
+};
