@@ -10,7 +10,10 @@ lengths.forEach((length) => {
   option.textContent = String(length);
   lengthSelect.append(option);
 });
-document.body.append(lengthSelect);
+const lengthLabel = document.createElement('label');
+lengthLabel.textContent = 'Length ';
+lengthLabel.append(lengthSelect);
+document.body.append(lengthLabel);
 
 const baseSelect = document.createElement('select');
 const bases = [
@@ -25,4 +28,11 @@ bases.forEach((system) => {
   option.textContent = system.label;
   baseSelect.append(option);
 });
-document.body.append(baseSelect);
+const baseLabel = document.createElement('label');
+baseLabel.textContent = 'Base ';
+baseLabel.append(baseSelect);
+document.body.append(baseLabel);
+
+const startButton = document.createElement('button');
+startButton.textContent = 'Start';
+document.body.append(startButton);
