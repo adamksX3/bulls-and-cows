@@ -41,3 +41,13 @@ startButton.addEventListener('click', () => {
   const base = Number(baseSelect.value);
   console.log(length, base);
 });
+
+baseSelect.addEventListener('change', () => {
+  const base = Number(baseSelect.value);
+  Array.from(lengthSelect.options).forEach((option) => {
+    option.disabled = Number(option.value) > base;
+  });
+  if (Number(lengthSelect.value) > base) {
+    lengthSelect.value = '2';
+  }
+});
