@@ -1,2 +1,3 @@
-const title: string = 'Bulls and Cows';
-console.log(title);
+const title = document.createElement('h1');
+title.textContent = 'Bulls and Cows';
+document.body.append(title);
