@@ -7,3 +7,7 @@ export const addToHistory = (history: HistoryEntry[], entry: HistoryEntry): Hist
   if (isDuplicate) return history;
   return [...history, entry];
 };
+
+export const isWin = (result: GuessResult, length: number): boolean => {
+  return result.bulls === length;
+};
