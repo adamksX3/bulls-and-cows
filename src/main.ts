@@ -36,3 +36,8 @@ document.body.append(baseLabel);
 const startButton = document.createElement('button');
 startButton.textContent = 'Start';
 document.body.append(startButton);
+startButton.addEventListener('click', () => {
+  const length = Number(lengthSelect.value);
+  const base = Number(baseSelect.value);
+  console.log(length, base);
+});
