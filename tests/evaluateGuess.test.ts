@@ -35,7 +35,7 @@ describe('evaluateGuess', () => {
   });
 
   test('counts one bull in hex', () => {
-    expect(evaluateGuess('b923', 'c21d')).toEqual({ bulls: 1, cows: 0 });
+    expect(evaluateGuess('b923', 'c12d')).toEqual({ bulls: 1, cows: 0 });
   });
 
   test('counts bull and cows with letters in hex', () => {
