@@ -1,3 +1,5 @@
+import { generateSecret } from './logic/secret.js';
+
 const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
 document.body.append(title);
@@ -40,7 +42,8 @@ document.body.append(startButton);
 startButton.addEventListener('click', () => {
   const length = Number(lengthSelect.value);
   const base = Number(baseSelect.value);
-  console.log(length, base);
+  const secret = generateSecret(length, base);
+  console.log(secret);
 });
 
 baseSelect.addEventListener('change', () => {
