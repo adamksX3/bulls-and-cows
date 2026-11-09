@@ -113,7 +113,6 @@ startButton.addEventListener('click', () => {
   });
   gameSection.append(guessInput, checkButton, historyList, newGameButton);
   document.body.append(gameSection);
-  console.log(secret);
 });
 
 baseSelect.addEventListener('change', () => {
