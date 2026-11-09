@@ -64,6 +64,14 @@ startButton.addEventListener('click', () => {
   let history: HistoryEntry[] = [];
   const startTime = Date.now();
   const historyList = document.createElement('ul');
+  const newGameButton = document.createElement('button');
+  newGameButton.textContent = 'New game';
+  newGameButton.addEventListener('click', () => {
+    gameSection.remove();
+    lengthSelect.disabled = false;
+    baseSelect.disabled = false;
+    startButton.disabled = false;
+  });
   const checkButton = document.createElement('button');
   checkButton.textContent = 'Check';
   checkButton.addEventListener('click', () => {
@@ -103,7 +111,7 @@ startButton.addEventListener('click', () => {
     });
     gameSection.append(leaderboardList);
   });
-  gameSection.append(guessInput, checkButton, historyList);
+  gameSection.append(guessInput, checkButton, historyList, newGameButton);
   document.body.append(gameSection);
   console.log(secret);
 });
