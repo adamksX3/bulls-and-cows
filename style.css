@@ -1,0 +1,259 @@
+:root {
+  --red: #e63946;
+  --orange: #f4a261;
+  --yellow: #ffd23f;
+  --green: #2a9d8f;
+  --lime: #8ac926;
+  --light-blue: #4cc9f0;
+  --blue: #3f96ff;
+  --purple: #8338ec;
+  --pink: #ff70a6;
+  --brown: #8d5524;
+  --black: #222222;
+  --paper: #fffef8;
+  --grid: #cfe3f5;
+  --pencil: #333;
+}
+
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-family: 'Gochi Hand', cursive;
+  font-size: 20px;
+  color: var(--pencil);
+  text-align: center;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button,
+select,
+input {
+  font: inherit;
+  border: 2px solid var(--pencil);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 4px 12px;
+  background-color: var(--paper);
+}
+
+label {
+  margin-right: 16px;
+}
+
+label + button {
+  background-color: var(--orange);
+}
+
+input + button {
+  background-color: var(--light-blue);
+}
+
+button + button {
+  background-color: var(--pink);
+}
+
+h1 {
+  color: var(--red);
+  font-size: 48px;
+  transform: rotate(-2deg);
+  text-shadow: 3px 3px 0 var(--yellow);
+}
+
+button {
+  background-color: var(--yellow);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  transform: rotate(-3deg);
+  background-color: var(--lime);
+}
+
+button:disabled {
+  opacity: 0.5;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.settings,
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls {
+  margin: 24px 0 270px;
+}
+
+.house {
+  margin-top: auto;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  min-height: 120px;
+  box-sizing: border-box;
+  padding: 16px 24px 24px;
+  background-color: var(--paper);
+  border: 4px solid var(--brown);
+  border-top: none;
+  border-radius: 2px 2px 14px 6px / 2px 2px 8px 14px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 4px 0;
+}
+
+ul li:nth-child(odd) {
+  color: var(--blue);
+}
+
+ul li:nth-child(even) {
+  color: var(--purple);
+}
+
+p {
+  color: var(--green);
+  font-size: 32px;
+  transform: rotate(-3deg);
+}
+
+ol {
+  color: var(--brown);
+  list-style-position: inside;
+  padding: 0;
+}
+
+ol li::marker {
+  color: var(--red);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 16px;
+  right: 32px;
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/sun.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.house::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  left: -40px;
+  bottom: 100%;
+  aspect-ratio: 600 / 270;
+  background-image: url('./images/roof.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: -6px;
+}
+
+html::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    url('./images/pen.svg'), url('./images/bull.svg'), url('./images/tree.svg'),
+    url('./images/tree.svg'), url('./images/flowers.svg'), url('./images/grass.svg');
+  background-position:
+    left 40px bottom 24px,
+    right 60px bottom 24px,
+    left 20% bottom 30px,
+    right 20% bottom 30px,
+    left bottom 8px,
+    left bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x;
+  background-size:
+    auto 180px,
+    auto 150px,
+    auto 260px,
+    auto 260px,
+    auto 50px,
+    auto 60px;
+}
+
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('./images/clouds.svg');
+  background-repeat: repeat-x;
+  background-size: 960px 160px;
+  background-position: 0 16px;
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  from {
+    background-position: 0 16px;
+  }
+  to {
+    background-position: 960px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding-top: 64px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  body::before {
+    width: 72px;
+    height: 72px;
+    top: 8px;
+    right: 8px;
+  }
+
+  .controls {
+    margin-bottom: 200px;
+  }
+
+  .house::after {
+    left: -12px;
+    right: -12px;
+  }
+
+  html::after {
+    background-size:
+      auto 90px,
+      auto 75px,
+      0 0,
+      0 0,
+      auto 40px,
+      auto 50px;
+  }
+}
