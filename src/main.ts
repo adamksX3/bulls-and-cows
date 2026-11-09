@@ -46,6 +46,12 @@ startButton.addEventListener('click', () => {
   lengthSelect.disabled = true;
   baseSelect.disabled = true;
   startButton.disabled = true;
+  const gameSection = document.createElement('div');
+  const guessInput = document.createElement('input');
+  const checkButton = document.createElement('button');
+  checkButton.textContent = 'Check';
+  gameSection.append(guessInput, checkButton);
+  document.body.append(gameSection);
   console.log(secret);
 });
 
