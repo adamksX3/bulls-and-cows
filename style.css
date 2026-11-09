@@ -24,15 +24,14 @@ body {
   font-family: 'Gochi Hand', cursive;
   font-size: 20px;
   color: var(--pencil);
-  margin: 24px;
-  max-width: 560px;
-  margin: 320px auto 48px;
-  padding: 8px 24px 32px;
   text-align: center;
-  border: 4px solid var(--brown);
-  border-top: none;
-  border-radius: 2px 2px 14px 6px / 2px 2px 8px 14px;
-  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button,
@@ -57,7 +56,7 @@ input + button {
   background-color: var(--light-blue);
 }
 
-ul + button {
+button + button {
   background-color: var(--pink);
 }
 
@@ -84,13 +83,31 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.game {
-  margin: 24px auto;
-  padding: 16px;
-  border: 3px dashed var(--blue);
-  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  transform: rotate(1deg);
+.settings,
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls {
+  margin: 24px 0 270px;
+}
+
+.house {
+  margin-top: auto;
+  position: relative;
+  width: 100%;
   max-width: 480px;
+  min-height: 120px;
+  box-sizing: border-box;
+  padding: 16px 24px 24px;
+  background-color: var(--paper);
+  border: 4px solid var(--brown);
+  border-top: none;
+  border-radius: 2px 2px 14px 6px / 2px 2px 8px 14px;
 }
 
 ul {
@@ -138,7 +155,7 @@ body::before {
   background-size: contain;
 }
 
-body::after {
+.house::after {
   content: '';
   position: absolute;
   right: -40px;
@@ -149,4 +166,94 @@ body::after {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   margin-bottom: -6px;
+}
+
+html::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    url('./images/pen.svg'), url('./images/bull.svg'), url('./images/tree.svg'),
+    url('./images/tree.svg'), url('./images/flowers.svg'), url('./images/grass.svg');
+  background-position:
+    left 40px bottom 24px,
+    right 60px bottom 24px,
+    left 20% bottom 30px,
+    right 20% bottom 30px,
+    left bottom 8px,
+    left bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x;
+  background-size:
+    auto 180px,
+    auto 150px,
+    auto 260px,
+    auto 260px,
+    auto 50px,
+    auto 60px;
+}
+
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('./images/clouds.svg');
+  background-repeat: repeat-x;
+  background-size: 960px 160px;
+  background-position: 0 16px;
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  from {
+    background-position: 0 16px;
+  }
+  to {
+    background-position: 960px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding-top: 64px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  body::before {
+    width: 72px;
+    height: 72px;
+    top: 8px;
+    right: 8px;
+  }
+
+  .controls {
+    margin-bottom: 200px;
+  }
+
+  .house::after {
+    left: -12px;
+    right: -12px;
+  }
+
+  html::after {
+    background-size:
+      auto 90px,
+      auto 75px,
+      0 0,
+      0 0,
+      auto 40px,
+      auto 50px;
+  }
 }
