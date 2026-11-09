@@ -1,6 +1,7 @@
 import { evaluateGuess } from './logic/evaluation.js';
 import { generateSecret } from './logic/secret.js';
 import { createDigitValidator, isValidGuess } from './logic/validation.js';
+import { addToHistory, HistoryEntry } from './logic/game.js';
 
 const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
@@ -55,15 +56,23 @@ startButton.addEventListener('click', () => {
   guessInput.addEventListener('input', () => {
     guessInput.value = guessInput.value.split('').filter(isValidDigit).join('');
   });
+  let history: HistoryEntry[] = [];
+  const historyList = document.createElement('ul');
   const checkButton = document.createElement('button');
   checkButton.textContent = 'Check';
   checkButton.addEventListener('click', () => {
     const guess = guessInput.value.toLowerCase();
     if (!isValidGuess(guess, length, base)) return;
     const result = evaluateGuess(secret, guess);
-    console.log(result);
+    history = addToHistory(history, { guess, result });
+    historyList.replaceChildren();
+    history.forEach((entry) => {
+      const li = document.createElement('li');
+      li.textContent = `${entry.guess} - ${entry.result.bulls}B ${entry.result.cows}C`;
+      historyList.append(li);
+    });
   });
-  gameSection.append(guessInput, checkButton);
+  gameSection.append(guessInput, checkButton, historyList);
   document.body.append(gameSection);
   console.log(secret);
 });
