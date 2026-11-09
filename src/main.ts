@@ -20,6 +20,7 @@ lengths.forEach((length) => {
   option.textContent = String(length);
   lengthSelect.append(option);
 });
+
 const lengthLabel = document.createElement('label');
 lengthLabel.textContent = 'Length ';
 lengthLabel.append(lengthSelect);
@@ -39,6 +40,7 @@ bases.forEach((system) => {
   baseSelect.append(option);
 });
 baseSelect.value = '10';
+
 const baseLabel = document.createElement('label');
 baseLabel.textContent = 'Base ';
 baseLabel.append(baseSelect);
@@ -47,23 +49,29 @@ document.body.append(baseLabel);
 const startButton = document.createElement('button');
 startButton.textContent = 'Start';
 document.body.append(startButton);
+
 startButton.addEventListener('click', () => {
   const length = Number(lengthSelect.value);
   const base = Number(baseSelect.value);
   const secret = generateSecret(length, base);
+
   lengthSelect.disabled = true;
   baseSelect.disabled = true;
   startButton.disabled = true;
+
   const gameSection = document.createElement('div');
+
   const guessInput = document.createElement('input');
   const isValidDigit = createDigitValidator(base);
   guessInput.maxLength = length;
   guessInput.addEventListener('input', () => {
     guessInput.value = guessInput.value.split('').filter(isValidDigit).join('');
   });
+
   let history: HistoryEntry[] = [];
   const startTime = Date.now();
   const historyList = document.createElement('ul');
+
   const newGameButton = document.createElement('button');
   newGameButton.textContent = 'New game';
   newGameButton.addEventListener('click', () => {
@@ -72,6 +80,7 @@ startButton.addEventListener('click', () => {
     baseSelect.disabled = false;
     startButton.disabled = false;
   });
+
   const checkButton = document.createElement('button');
   checkButton.textContent = 'Check';
   checkButton.addEventListener('click', () => {
@@ -79,12 +88,14 @@ startButton.addEventListener('click', () => {
     if (!isValidGuess(guess, length, base)) return;
     const result = evaluateGuess(secret, guess);
     history = addToHistory(history, { guess, result });
+
     historyList.replaceChildren();
     history.forEach((entry) => {
       const li = document.createElement('li');
       li.textContent = `${entry.guess} - ${entry.result.bulls}B ${entry.result.cows}C`;
       historyList.append(li);
     });
+
     if (!isWin(result, length)) return;
     const time = Math.round((Date.now() - startTime) / 1000);
     const attempts = history.length;
@@ -93,6 +104,7 @@ startButton.addEventListener('click', () => {
     const winMessage = document.createElement('p');
     winMessage.textContent = `You won! Attempts: ${attempts}, time: ${time}s`;
     gameSection.append(winMessage);
+
     const key = getLeaderboardKey(length, base);
     const entry: LeaderboardEntry = {
       attempts,
@@ -103,6 +115,7 @@ startButton.addEventListener('click', () => {
     };
     const board = addToLeaderboard(loadLeaderboard(key), entry, LEADERBOARD_LIMIT);
     saveLeaderboard(key, board);
+
     const leaderboardList = document.createElement('ol');
     board.forEach((item) => {
       const li = document.createElement('li');
@@ -111,6 +124,7 @@ startButton.addEventListener('click', () => {
     });
     gameSection.append(leaderboardList);
   });
+
   gameSection.append(guessInput, checkButton, historyList, newGameButton);
   document.body.append(gameSection);
 });
