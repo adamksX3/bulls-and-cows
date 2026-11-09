@@ -1,7 +1,7 @@
 import { evaluateGuess } from './logic/evaluation.js';
 import { generateSecret } from './logic/secret.js';
 import { createDigitValidator, isValidGuess } from './logic/validation.js';
-import { addToHistory, HistoryEntry } from './logic/game.js';
+import { addToHistory, HistoryEntry, isWin } from './logic/game.js';
 
 const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
@@ -57,6 +57,7 @@ startButton.addEventListener('click', () => {
     guessInput.value = guessInput.value.split('').filter(isValidDigit).join('');
   });
   let history: HistoryEntry[] = [];
+  const startTime = Date.now();
   const historyList = document.createElement('ul');
   const checkButton = document.createElement('button');
   checkButton.textContent = 'Check';
@@ -71,6 +72,14 @@ startButton.addEventListener('click', () => {
       li.textContent = `${entry.guess} - ${entry.result.bulls}B ${entry.result.cows}C`;
       historyList.append(li);
     });
+    if (!isWin(result, length)) return;
+    const time = Math.round((Date.now() - startTime) / 1000);
+    const attempts = history.length;
+    guessInput.disabled = true;
+    checkButton.disabled = true;
+    const winMessage = document.createElement('p');
+    winMessage.textContent = `You won! Attempts: ${attempts}, time: ${time}s`;
+    gameSection.append(winMessage);
   });
   gameSection.append(guessInput, checkButton, historyList);
   document.body.append(gameSection);
