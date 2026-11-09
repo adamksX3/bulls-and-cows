@@ -60,6 +60,7 @@ startButton.addEventListener('click', () => {
   startButton.disabled = true;
 
   const gameSection = document.createElement('div');
+  gameSection.classList.add('game');
 
   const guessInput = document.createElement('input');
   const isValidDigit = createDigitValidator(base);
