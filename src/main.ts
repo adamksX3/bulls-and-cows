@@ -43,6 +43,9 @@ startButton.addEventListener('click', () => {
   const length = Number(lengthSelect.value);
   const base = Number(baseSelect.value);
   const secret = generateSecret(length, base);
+  lengthSelect.disabled = true;
+  baseSelect.disabled = true;
+  startButton.disabled = true;
   console.log(secret);
 });
 
