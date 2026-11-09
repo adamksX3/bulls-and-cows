@@ -12,6 +12,10 @@ const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
 document.body.append(title);
 
+const settingsSection = document.createElement('div');
+settingsSection.classList.add('settings');
+document.body.append(settingsSection);
+
 const lengthSelect = document.createElement('select');
 const lengths = [2, 3, 4, 5, 6];
 lengths.forEach((length) => {
@@ -24,7 +28,7 @@ lengths.forEach((length) => {
 const lengthLabel = document.createElement('label');
 lengthLabel.textContent = 'Length ';
 lengthLabel.append(lengthSelect);
-document.body.append(lengthLabel);
+settingsSection.append(lengthLabel);
 
 const baseSelect = document.createElement('select');
 const bases = [
@@ -44,11 +48,11 @@ baseSelect.value = '10';
 const baseLabel = document.createElement('label');
 baseLabel.textContent = 'Base ';
 baseLabel.append(baseSelect);
-document.body.append(baseLabel);
+settingsSection.append(baseLabel);
 
 const startButton = document.createElement('button');
 startButton.textContent = 'Start';
-document.body.append(startButton);
+settingsSection.append(startButton);
 
 startButton.addEventListener('click', () => {
   const length = Number(lengthSelect.value);
@@ -59,8 +63,11 @@ startButton.addEventListener('click', () => {
   baseSelect.disabled = true;
   startButton.disabled = true;
 
+  const controlsSection = document.createElement('div');
+  controlsSection.classList.add('controls');
+
   const gameSection = document.createElement('div');
-  gameSection.classList.add('game');
+  gameSection.classList.add('house');
 
   const guessInput = document.createElement('input');
   const isValidDigit = createDigitValidator(base);
@@ -76,6 +83,7 @@ startButton.addEventListener('click', () => {
   const newGameButton = document.createElement('button');
   newGameButton.textContent = 'New game';
   newGameButton.addEventListener('click', () => {
+    controlsSection.remove();
     gameSection.remove();
     lengthSelect.disabled = false;
     baseSelect.disabled = false;
@@ -126,8 +134,9 @@ startButton.addEventListener('click', () => {
     gameSection.append(leaderboardList);
   });
 
-  gameSection.append(guessInput, checkButton, historyList, newGameButton);
-  document.body.append(gameSection);
+  controlsSection.append(guessInput, checkButton, newGameButton);
+  gameSection.append(historyList);
+  document.body.append(controlsSection, gameSection);
 });
 
 baseSelect.addEventListener('change', () => {
