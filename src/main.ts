@@ -1,4 +1,5 @@
 import { generateSecret } from './logic/secret.js';
+import { createDigitValidator } from './logic/validation.js';
 
 const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
@@ -48,6 +49,11 @@ startButton.addEventListener('click', () => {
   startButton.disabled = true;
   const gameSection = document.createElement('div');
   const guessInput = document.createElement('input');
+  const isValidDigit = createDigitValidator(base);
+  guessInput.maxLength = length;
+  guessInput.addEventListener('input', () => {
+    guessInput.value = guessInput.value.split('').filter(isValidDigit).join('');
+  });
   const checkButton = document.createElement('button');
   checkButton.textContent = 'Check';
   gameSection.append(guessInput, checkButton);
