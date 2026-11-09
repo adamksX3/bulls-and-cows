@@ -2,6 +2,11 @@ import { evaluateGuess } from './logic/evaluation.js';
 import { generateSecret } from './logic/secret.js';
 import { createDigitValidator, isValidGuess } from './logic/validation.js';
 import { addToHistory, HistoryEntry, isWin } from './logic/game.js';
+import { addToLeaderboard, getLeaderboardKey } from './logic/leaderboard.js';
+import type { LeaderboardEntry } from './logic/leaderboard.js';
+import { loadLeaderboard, saveLeaderboard } from './storage.js';
+
+const LEADERBOARD_LIMIT = 5;
 
 const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
@@ -80,6 +85,23 @@ startButton.addEventListener('click', () => {
     const winMessage = document.createElement('p');
     winMessage.textContent = `You won! Attempts: ${attempts}, time: ${time}s`;
     gameSection.append(winMessage);
+    const key = getLeaderboardKey(length, base);
+    const entry: LeaderboardEntry = {
+      attempts,
+      time,
+      date: new Date().toLocaleDateString(),
+      length,
+      base,
+    };
+    const board = addToLeaderboard(loadLeaderboard(key), entry, LEADERBOARD_LIMIT);
+    saveLeaderboard(key, board);
+    const leaderboardList = document.createElement('ol');
+    board.forEach((item) => {
+      const li = document.createElement('li');
+      li.textContent = `${item.attempts} attempts, ${item.time}s, ${item.date}`;
+      leaderboardList.append(li);
+    });
+    gameSection.append(leaderboardList);
   });
   gameSection.append(guessInput, checkButton, historyList);
   document.body.append(gameSection);
