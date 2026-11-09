@@ -1,5 +1,6 @@
+import { evaluateGuess } from './logic/evaluation.js';
 import { generateSecret } from './logic/secret.js';
-import { createDigitValidator } from './logic/validation.js';
+import { createDigitValidator, isValidGuess } from './logic/validation.js';
 
 const title = document.createElement('h1');
 title.textContent = 'Bulls and Cows';
@@ -56,6 +57,12 @@ startButton.addEventListener('click', () => {
   });
   const checkButton = document.createElement('button');
   checkButton.textContent = 'Check';
+  checkButton.addEventListener('click', () => {
+    const guess = guessInput.value.toLowerCase();
+    if (!isValidGuess(guess, length, base)) return;
+    const result = evaluateGuess(secret, guess);
+    console.log(result);
+  });
   gameSection.append(guessInput, checkButton);
   document.body.append(gameSection);
   console.log(secret);
