@@ -1,0 +1,152 @@
+:root {
+  --red: #e63946;
+  --orange: #f4a261;
+  --yellow: #ffd23f;
+  --green: #2a9d8f;
+  --lime: #8ac926;
+  --light-blue: #4cc9f0;
+  --blue: #3f96ff;
+  --purple: #8338ec;
+  --pink: #ff70a6;
+  --brown: #8d5524;
+  --black: #222222;
+  --paper: #fffef8;
+  --grid: #cfe3f5;
+  --pencil: #333;
+}
+
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-family: 'Gochi Hand', cursive;
+  font-size: 20px;
+  color: var(--pencil);
+  margin: 24px;
+  max-width: 560px;
+  margin: 320px auto 48px;
+  padding: 8px 24px 32px;
+  text-align: center;
+  border: 4px solid var(--brown);
+  border-top: none;
+  border-radius: 2px 2px 14px 6px / 2px 2px 8px 14px;
+  position: relative;
+}
+
+button,
+select,
+input {
+  font: inherit;
+  border: 2px solid var(--pencil);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 4px 12px;
+  background-color: var(--paper);
+}
+
+label {
+  margin-right: 16px;
+}
+
+label + button {
+  background-color: var(--orange);
+}
+
+input + button {
+  background-color: var(--light-blue);
+}
+
+ul + button {
+  background-color: var(--pink);
+}
+
+h1 {
+  color: var(--red);
+  font-size: 48px;
+  transform: rotate(-2deg);
+  text-shadow: 3px 3px 0 var(--yellow);
+}
+
+button {
+  background-color: var(--yellow);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  transform: rotate(-3deg);
+  background-color: var(--lime);
+}
+
+button:disabled {
+  opacity: 0.5;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.game {
+  margin: 24px auto;
+  padding: 16px;
+  border: 3px dashed var(--blue);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  transform: rotate(1deg);
+  max-width: 480px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 4px 0;
+}
+
+ul li:nth-child(odd) {
+  color: var(--blue);
+}
+
+ul li:nth-child(even) {
+  color: var(--purple);
+}
+
+p {
+  color: var(--green);
+  font-size: 32px;
+  transform: rotate(-3deg);
+}
+
+ol {
+  color: var(--brown);
+  list-style-position: inside;
+  padding: 0;
+}
+
+ol li::marker {
+  color: var(--red);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 16px;
+  right: 32px;
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/sun.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  left: -40px;
+  bottom: 100%;
+  aspect-ratio: 600 / 270;
+  background-image: url('./images/roof.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: -6px;
+}
